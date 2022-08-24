@@ -1,7 +1,7 @@
 package br.com.grbarbosa.cadastro.rest;
 
 import br.com.grbarbosa.cadastro.model.entity.Cliente;
-import br.com.grbarbosa.cadastro.model.entity.model.repository.ClienteRepository;
+import br.com.grbarbosa.cadastro.model.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
