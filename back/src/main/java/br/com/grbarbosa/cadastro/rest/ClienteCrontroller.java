@@ -31,7 +31,7 @@ public class ClienteCrontroller {
     public Cliente acharPorId( @PathVariable Integer id ){
         return clienteRepository
                 .findById(id)
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND ));
+                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não encontrado!"));
     }
 
     @DeleteMapping("{id}" )
@@ -43,12 +43,12 @@ public class ClienteCrontroller {
                     clienteRepository.delete(cliente);
                     return Void.TYPE;
                 })
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND ));
+                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não encontrado!"));
     }
 
     @PutMapping("{id}" )
     @ResponseStatus( HttpStatus.NO_CONTENT )
-    public void atualizar(@PathVariable Integer id, @RequestBody Cliente clienteAtualizado){
+    public void atualizar(@PathVariable Integer id, @RequestBody @Valid Cliente clienteAtualizado){
         clienteRepository
                 .findById(id)
                 .map( cliente -> {
@@ -58,7 +58,6 @@ public class ClienteCrontroller {
                     cliente.setEmail(clienteAtualizado.getEmail());
                   return clienteRepository.save(cliente);
                 })
-                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND ));
-
+                .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Cliente não encontrado!" ));
     }
 }
